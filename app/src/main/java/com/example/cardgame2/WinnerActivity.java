@@ -17,6 +17,7 @@ public class WinnerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("lifeCheck", "WinnerActivityOnCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
         try {
