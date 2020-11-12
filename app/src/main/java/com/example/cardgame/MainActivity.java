@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
     private int leftPlayerScore = 0;
     private int draws = 0;
 
-
+    //TEST
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("lifeCheck", "MainActivityOnCreate");
