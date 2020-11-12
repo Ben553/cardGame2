@@ -75,9 +75,7 @@ public class MainActivity extends Activity {
             switch (v.getId()) {
                 case R.id.game_BTN_play:
                     play.setVisibility(View.INVISIBLE);
-                    if (rightPlayerScore + leftPlayerScore + draws == 26)
-                        openActivity(MainActivity.this);
-                    else {
+                    for(int i = 0; i < 26; i++) {
                         // Get top cards:
                         String[] topCards = cardsDeck.getTopCards();
                         Log.d(CardsDeck.TAG, topCards[0] + " | " + topCards[1]);
@@ -101,6 +99,7 @@ public class MainActivity extends Activity {
                                 rightScore.setText("" + rightPlayerScore);
                         }
                     }
+                openActivity(MainActivity.this);
                     break;
             }
         }
