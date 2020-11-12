@@ -1,4 +1,4 @@
-package com.example.cardgame;
+package com.example.cardgame2;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +19,6 @@ public class MainActivity extends Activity {
     private int leftPlayerScore = 0;
     private int draws = 0;
 
-    //TEST
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("lifeCheck", "MainActivityOnCreate");
@@ -75,6 +74,7 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.game_BTN_play:
+                    play.setVisibility(View.INVISIBLE);
                     if (rightPlayerScore + leftPlayerScore + draws == 26)
                         openActivity(MainActivity.this);
                     else {
