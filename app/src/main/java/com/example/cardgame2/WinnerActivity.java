@@ -23,7 +23,7 @@ public class WinnerActivity extends AppCompatActivity {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
 
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_winner);
         }
 
         winnerLeft = findViewById(R.id.winner_IMG_winnerLeft);
