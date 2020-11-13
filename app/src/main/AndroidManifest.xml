@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.CardGame">
-        <activity android:name=".ClipboardActivity"></activity>
-        <activity android:name=".MenuActivity">
-            <intent-filter>
+        <activity android:name=".ClipboardActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".MenuActivity"
+            android:screenOrientation="portrait">
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
