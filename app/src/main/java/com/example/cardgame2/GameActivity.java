@@ -1,5 +1,6 @@
 package com.example.cardgame2;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -7,11 +8,15 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class GameActivity extends Activity {
     static String TAG = "GameActivity";
+    private int intervalTime = 1500;
+    private ProgressBar progressBar;
     private CardsDeck cardsDeck;
     private ImageView play;
     private TextView rightScore;
@@ -36,6 +41,7 @@ public class GameActivity extends Activity {
         leftScore = findViewById(R.id.winner_LBL_scoreLeft);
         leftCardImg = findViewById(R.id.game_IMG_card_1);
         rightCardImg = findViewById(R.id.game_IMG_card_2);
+        progressBar = findViewById(R.id.game_PB_progressBar);
 
         cardsDeck = new CardsDeck();
         cardsDeck.shuffle();
@@ -73,14 +79,21 @@ public class GameActivity extends Activity {
         super.onPause();
     }
 
+    private void startAnimation(){
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+        progressAnimator.setDuration(intervalTime);
+        progressAnimator.setInterpolator(new LinearInterpolator());
+        progressAnimator.start();
+    }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.game_BTN_play:
-                    int interval_time = 1500;
+
                     play.setVisibility(View.INVISIBLE);
-                    CountDownTimer countDownTimer = new CountDownTimer(26 * interval_time, interval_time) {
+                    CountDownTimer countDownTimer = new CountDownTimer(26 * intervalTime, intervalTime) {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             Log.d(TAG, "-> onTick: " + millisUntilFinished);
@@ -108,6 +121,7 @@ public class GameActivity extends Activity {
 
     private void nextRound() {
         startSound(R.raw.card_flip_sound, 50);
+        startAnimation();
 
         // Get top cards:
         String[] topCards = cardsDeck.getTopCards();
