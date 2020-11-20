@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GameActivity extends Activity {
+    static String TAG = "GameActivity";
     private CardsDeck cardsDeck;
     private ImageView play;
     private TextView rightScore;
@@ -76,37 +78,60 @@ public class GameActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.game_BTN_play:
-                    startSound(R.raw.card_flip_sound, 50);
-                    if (rightPlayerScore + leftPlayerScore + draws == 26) {
-                        openActivity(WinnerActivity.class);
-                    } else {
-                        // Get top cards:
-                        String[] topCards = cardsDeck.getTopCards();
-                        Log.d(CardsDeck.TAG, topCards[0] + " | " + topCards[1]);
-
-                        // Show cards.
-                        leftCardImg.setImageResource(getResources().getIdentifier(topCards[0], "drawable", getPackageName()));
-                        rightCardImg.setImageResource(getResources().getIdentifier(topCards[1], "drawable", getPackageName()));
-
-                        // Get winner.
-                        switch (CardsDeck.getWinner(topCards[0], topCards[1])) {
-                            case 0:
-                                // Number of draws + 1
-                                draws++;
-                                break;
-                            case 1:
-                                leftPlayerScore++;
-                                leftScore.setText("" + leftPlayerScore);
-                                break;
-                            case 2:
-                                rightPlayerScore++;
-                                rightScore.setText("" + rightPlayerScore);
+                    int interval_time = 1500;
+                    play.setVisibility(View.INVISIBLE);
+                    CountDownTimer countDownTimer = new CountDownTimer(26 * interval_time, interval_time) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            Log.d(TAG, "-> onTick: " + millisUntilFinished);
+                            nextRound();
                         }
-                    }
+
+                        @Override
+                        public void onFinish() {
+                            Log.d(TAG, "-> onFinish");
+                            openActivity(WinnerActivity.class);
+                        }
+                    };
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            countDownTimer.start();
+                        }
+                    });
+                    thread.start();
+
                     break;
             }
         }
     };
+
+    private void nextRound() {
+        startSound(R.raw.card_flip_sound, 50);
+
+        // Get top cards:
+        String[] topCards = cardsDeck.getTopCards();
+        Log.d(CardsDeck.TAG, topCards[0] + " | " + topCards[1]);
+
+        // Show cards.
+        leftCardImg.setImageResource(getResources().getIdentifier(topCards[0], "drawable", getPackageName()));
+        rightCardImg.setImageResource(getResources().getIdentifier(topCards[1], "drawable", getPackageName()));
+
+        // Get winner.
+        switch (CardsDeck.getWinner(topCards[0], topCards[1])) {
+            case 0:
+                // Number of draws + 1
+                draws++;
+                break;
+            case 1:
+                leftPlayerScore++;
+                leftScore.setText("" + leftPlayerScore);
+                break;
+            case 2:
+                rightPlayerScore++;
+                rightScore.setText("" + rightPlayerScore);
+        }
+    }
 
     private void openActivity(Class activity) {
         Intent myIntent = new Intent(GameActivity.this, activity);
