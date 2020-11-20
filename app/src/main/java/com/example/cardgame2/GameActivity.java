@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class GameActivity extends Activity {
     private CardsDeck cardsDeck;
     private ImageView play;
     private TextView rightScore;
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
                 case R.id.game_BTN_play:
                     startSound(R.raw.card_flip_sound, 50);
                     if (rightPlayerScore + leftPlayerScore + draws == 26) {
-                        openActivity(MainActivity.this);
+                        openActivity(WinnerActivity.class);
                     } else {
                         // Get top cards:
                         String[] topCards = cardsDeck.getTopCards();
@@ -108,8 +108,8 @@ public class MainActivity extends Activity {
         }
     };
 
-    private void openActivity(Activity activity) {
-        Intent myIntent = new Intent(activity, WinnerActivity.class);
+    private void openActivity(Class activity) {
+        Intent myIntent = new Intent(GameActivity.this, activity);
         myIntent.putExtra("LEFT_SCORE",String.valueOf(leftScore.getText()));
         myIntent.putExtra("RIGHT_SCORE",String.valueOf(rightScore.getText()));
         startActivity(myIntent);
