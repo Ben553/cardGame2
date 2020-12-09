@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class MenuActivity extends AppCompatActivity {
     private ImageView startGame;
     private ImageView clipBoard;
+    private EditText playerOneName;
+    private EditText playerTwoName;
+    private RecordsTable mainRecordsTable;
+    String player1,player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +31,17 @@ public class MenuActivity extends AppCompatActivity {
 
         startGame = findViewById(R.id.menu_BTN_startGame);
         clipBoard = findViewById(R.id.menu_BTN_clipBoard);
+        playerOneName = findViewById(R.id.menu_EDT_firstName);
+        playerTwoName = findViewById(R.id.menu_EDT_secondName);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent(MenuActivity.this , GameActivity.class);
+                player1=playerOneName.getText().toString();
+                player2 = playerTwoName.getText().toString();
+                mIntent.putExtra("Value1",player1);
+                mIntent.putExtra("Value2",player2);
                 startActivity(mIntent);
             }
         });
@@ -38,11 +49,13 @@ public class MenuActivity extends AppCompatActivity {
         clipBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(MenuActivity.this ,ClipboardActivity.class);
+                Intent mIntent = new Intent(MenuActivity.this , RecordsActivity.class);
+                mIntent.putExtra("KEY",2);
+                // mIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(mIntent);
+                finish();
             }
         });
-
 
     }
 

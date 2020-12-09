@@ -26,6 +26,8 @@ public class GameActivity extends Activity {
     private int rightPlayerScore = 0;
     private int leftPlayerScore = 0;
     private int draws = 0;
+    private TextView firstPlayerName;
+    private TextView secondPlayerName;
 
 
     @Override
@@ -37,11 +39,16 @@ public class GameActivity extends Activity {
 
         play = findViewById(R.id.game_BTN_play);
         play.setOnClickListener(onClickListener);
-        rightScore = findViewById(R.id.winner_LBL_scoreRight);
-        leftScore = findViewById(R.id.winner_LBL_scoreLeft);
+        rightScore = findViewById(R.id.game_LBL_scoreRight);
+        leftScore = findViewById(R.id.game_LBL_scoreLeft);
         leftCardImg = findViewById(R.id.game_IMG_card_1);
         rightCardImg = findViewById(R.id.game_IMG_card_2);
         progressBar = findViewById(R.id.game_PB_progressBar);
+        firstPlayerName = findViewById(R.id.game_LBL_firstPlayerName);
+        secondPlayerName = findViewById(R.id.game_LBL_secondPlayerName);
+
+        firstPlayerName.setText(getIntent().getExtras().getString("Value1"));
+        secondPlayerName.setText(getIntent().getExtras().getString("Value2"));
 
         cardsDeck = new CardsDeck();
         cardsDeck.shuffle();
@@ -151,7 +158,10 @@ public class GameActivity extends Activity {
         Intent myIntent = new Intent(GameActivity.this, activity);
         myIntent.putExtra("LEFT_SCORE",String.valueOf(leftScore.getText()));
         myIntent.putExtra("RIGHT_SCORE",String.valueOf(rightScore.getText()));
+        myIntent.putExtra("PLAYER_ONE_NAME",firstPlayerName.getText().toString());
+        myIntent.putExtra("PLAYER_TWO_NAME",secondPlayerName.getText().toString());
         startActivity(myIntent);
+        finish();
     }
 
 

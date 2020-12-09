@@ -22,12 +22,22 @@
         android:layout_marginHorizontal="30dp"
         android:weightSum="4">
 
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/winner_LBL_firstPlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEST"
+                android:textSize="5mm"
+                android:layout_gravity="left"
+/>
 
             <ImageView
                 android:layout_width="80dp"
@@ -58,6 +68,14 @@
             android:layout_gravity="center"
             android:gravity="right"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/winner_LBL_secondPlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEST"
+                android:textSize="5mm"
+                android:layout_gravity="right"
+                />
 
             <ImageView
                 android:layout_width="80dp"
@@ -83,7 +101,7 @@
         android:gravity="bottom">
 
         <TextView
-            android:id="@+id/winner_LBL_scoreLeft"
+            android:id="@+id/game_LBL_scoreLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
@@ -91,7 +109,7 @@
             android:layout_weight="0.5"/>
 
         <TextView
-            android:id="@+id/winner_LBL_scoreRight"
+            android:id="@+id/game_LBL_scoreRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
@@ -111,16 +129,16 @@
         android:gravity="center"
         >
         <TextView
-            android:id="@+id/game_TV_playAgine"
+            android:id="@+id/game_TV_playAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menu"
+            android:text="Records Table"
             android:textSize="30sp"
             android:background="@color/background_green"
             />
 
         <ImageView
-            android:id="@+id/game_BTN_playAgine"
+            android:id="@+id/game_BTN_playAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/play_again"
