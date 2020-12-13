@@ -88,7 +88,7 @@ public class GameActivity extends Activity {
 
     private void startAnimation(){
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
-        progressAnimator.setDuration(intervalTime);
+        progressAnimator.setDuration(1250);
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.start();
     }
