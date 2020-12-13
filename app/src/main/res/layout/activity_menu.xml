@@ -35,7 +35,7 @@
                 android:layout_marginTop="5mm"
                 android:rotationX="7"
                 android:text="Cards Game"
-                android:textColor="#10347A"
+                android:textColor="#77A5FF"
                 android:textSize="9mm"
                 android:textStyle="bold" />
 
@@ -50,22 +50,38 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_marginTop="3mm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player 1 Name:"
+                    android:textStyle="bold"
+                    android:textSize="4mm"
+                    android:textColor="@color/white"/>
+
                 <EditText
                     android:id="@+id/menu_EDT_firstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:textSize="5mm"
-                    android:text="First player name" />
+                    android:textSize="5mm"/>
+
+                <TextView
+                    android:layout_marginTop="3mm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player 2 Name:"
+                    android:textStyle="bold"
+                    android:textSize="4mm"
+                    android:textColor="@color/white"/>
 
                 <EditText
                     android:id="@+id/menu_EDT_secondName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:layout_marginTop="3mm"
-                    android:textSize="5mm"
-                    android:text="Second player name" />
+                    android:layout_marginTop="1mm"
+                    android:textSize="5mm" />
             </LinearLayout>
         </FrameLayout>
 

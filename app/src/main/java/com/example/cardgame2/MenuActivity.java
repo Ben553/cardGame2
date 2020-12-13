@@ -1,8 +1,11 @@
 package com.example.cardgame2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +17,6 @@ public class MenuActivity extends AppCompatActivity {
     private ImageView clipBoard;
     private EditText playerOneName;
     private EditText playerTwoName;
-    private RecordsTable mainRecordsTable;
     String player1,player2;
 
     @Override
@@ -27,6 +29,12 @@ public class MenuActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
 
             setContentView(R.layout.activity_main);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MenuActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }
 
         startGame = findViewById(R.id.menu_BTN_startGame);
@@ -43,6 +51,7 @@ public class MenuActivity extends AppCompatActivity {
                 mIntent.putExtra("Value1",player1);
                 mIntent.putExtra("Value2",player2);
                 startActivity(mIntent);
+                finish();
             }
         });
 
@@ -51,7 +60,6 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mIntent = new Intent(MenuActivity.this , RecordsActivity.class);
                 mIntent.putExtra("KEY",2);
-                // mIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(mIntent);
                 finish();
             }
